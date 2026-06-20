@@ -1,0 +1,10 @@
+---
+import darkLogo from '../assets/logos/bg-white_1.svg';
+import lightLogo from '../assets/logos/bg-color-horizontal.svg';
+interface Props { footer?: boolean; }
+const { footer = false } = Astro.props;
+---
+{footer ? <img class="footer-logo" src={darkLogo.src} alt="Nimble Pay" /> : <>
+	<img class="logo logo-dark" src={darkLogo.src} alt="Nimble Pay" />
+	<img class="logo logo-light" src={lightLogo.src} alt="Nimble Pay" />
+</>}

@@ -1,0 +1,14 @@
+---
+import PaymentIcon from './PaymentIcon.astro';
+const paymentTypes = [
+	{ icon: 'card', title: 'Tarjetas', copy: 'Acepta pagos con chip o banda de forma simple y segura.' },
+	{ icon: 'contactless', title: 'Contactless', copy: 'Pagos rápidos con solo acercar una tarjeta o dispositivo.' },
+	{ icon: 'wallet', title: 'Wallets digitales', copy: 'Cobra con las billeteras digitales que tus clientes ya usan.' },
+] as const;
+---
+<section class="payments light-section" id="soluciones">
+	<div class="wrap payments-layout">
+		<div class="section-intro reveal"><p class="section-label">Una forma más simple de cobrar</p><h2>Acepta pagos como tus clientes prefieren.</h2><p>Tarjetas, contactless y wallets digitales en un solo sistema fácil de usar.</p></div>
+		<div class="payment-list">{paymentTypes.map((item, index) => <article class="payment-item reveal" style={`--delay:${index * 90}ms`}><PaymentIcon name={item.icon} /><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
+	</div>
+</section>

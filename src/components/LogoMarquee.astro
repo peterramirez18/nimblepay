@@ -1,0 +1,31 @@
+---
+import dejavoLogo from '../assets/partner-logos/dejavoo.webp';
+import cloverLogo from '../assets/partner-logos/clover.svg';
+import shift4Logo from '../assets/partner-logos/shift4.svg';
+import lavuLogo from '../assets/partner-logos/lavu.webp';
+
+const partners = [
+	{ name: 'Dejavoo', src: dejavoLogo },
+	{ name: 'Clover', src: cloverLogo },
+	{ name: 'Shift4', src: shift4Logo },
+	{ name: 'Lavu', src: lavuLogo },
+];
+
+const repeatedPartners = Array.from({ length: 4 }, () => partners).flat();
+---
+
+<section class="logo-marquee dark-section" aria-labelledby="partners-title">
+	<div class="wrap logo-marquee-heading reveal">
+		<p class="section-label" id="partners-title">Tecnología que se adapta a tu operación</p>
+		<p>Integramos soluciones POS confiables para cada tipo de negocio.</p>
+	</div>
+	<div class="marquee-window" role="region" aria-label="Plataformas compatibles">
+		<div class="marquee-track">
+			{repeatedPartners.map((partner, index) => (
+				<div class="partner-logo" aria-hidden={index >= partners.length ? 'true' : undefined}>
+					{partner.src ? <img src={partner.src.src} alt={index < partners.length ? partner.name : ''} loading="lazy" /> : <span>{partner.label}</span>}
+				</div>
+			))}
+		</div>
+	</div>
+</section>

@@ -1,11 +1,51 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import LogoMarquee from '../components/LogoMarquee.astro';
+import Payments from '../components/Payments.astro';
+import Terminals from '../components/Terminals.astro';
+import IntegratedTechnology from '../components/IntegratedTechnology.astro';
+import Profit from '../components/Profit.astro';
+import Pos from '../components/Pos.astro';
+import Support from '../components/Support.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Nimble Pay | Pagos inteligentes para tu negocio" description="Soluciones de pago y sistemas POS modernos para restaurantes, tiendas y negocios de servicios.">
+	<div class="site-shell">
+		<Header />
+		<main id="top">
+			<Hero />
+			<LogoMarquee />
+			<Payments />
+			<Terminals />
+			<IntegratedTechnology />
+			<Profit />
+			<Pos />
+			<Support />
+			<FinalCta />
+		</main>
+		<Footer />
+	</div>
+
+	<script is:inline>
+		const root = document.documentElement;
+		const toggle = document.querySelector('.theme-toggle');
+		const storedTheme = localStorage.getItem('nimble-theme');
+		const initialTheme = storedTheme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		root.dataset.theme = initialTheme;
+		toggle?.setAttribute('aria-pressed', String(initialTheme === 'light'));
+		toggle?.addEventListener('click', () => {
+			const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+			root.dataset.theme = next;
+			localStorage.setItem('nimble-theme', next);
+			toggle.setAttribute('aria-pressed', String(next === 'light'));
+		});
+		const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+			if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+		}), { threshold: .12 });
+		document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+	</script>
 </Layout>

@@ -1,0 +1,19 @@
+---
+import Button from './Button.astro';
+import MediaFrame from './MediaFrame.astro';
+---
+<section class="hero dark-section">
+	<div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+	<div class="wrap hero-grid">
+		<div class="hero-copy reveal">
+			<h1>Pagos inteligentes.<br /><span>Más ganancias.</span><br />Menos estrés.</h1>
+			<p>Acepta pagos modernos, reduce costos y recibe soporte real con una solución POS lista para tu negocio.</p>
+			<div class="button-row"><Button href="#contacto">Agendar demo gratis <span aria-hidden="true">↗</span></Button><Button href="tel:+12082841772" variant="ghost">Llama o escribe: (208) 284-1772</Button></div>
+		</div>
+		<div class="hero-visual reveal">
+			<MediaFrame alt="Espacio reservado para mostrar el sistema POS de Nimble Pay" />
+			<div class="floating-note"><span>POS listo</span><strong>Conecta y cobra.</strong></div>
+		</div>
+	</div>
+	<div class="ribbon" aria-hidden="true"></div>
+</section>

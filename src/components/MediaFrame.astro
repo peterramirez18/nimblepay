@@ -1,0 +1,6 @@
+---
+import placeholder from '../assets/image-placeholder.png';
+interface Props { alt: string; tilted?: boolean; }
+const { alt, tilted = false } = Astro.props;
+---
+<div class:list={['media-frame', tilted && 'tilted', 'reveal']}><img src={placeholder.src} alt={alt} /></div>

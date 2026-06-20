@@ -1,0 +1,39 @@
+---
+import placeholder from '../assets/image-placeholder.png';
+
+const compactTerminals = [
+	{ brand: 'Clover', model: 'Flex 2026', alt: 'Espacio reservado para la terminal Clover Flex 2026' },
+	{ brand: 'Dejavoo', model: 'P8', alt: 'Espacio reservado para la terminal Dejavoo P8' },
+];
+---
+
+<section class="terminals dark-section" id="terminales">
+	<div class="terminal-orbit" aria-hidden="true"></div>
+	<div class="wrap">
+		<header class="terminals-heading reveal">
+			<div>
+				<p class="section-label">Terminales para</p>
+				<h2>Cada negocio.</h2>
+			</div>
+			<p>Elige la solución ideal para tu operación.</p>
+		</header>
+
+		<div class="terminals-showcase">
+			<div class="terminal-compact-list">
+				{compactTerminals.map((terminal, index) => (
+					<article class="terminal-card compact-terminal reveal" style={`--delay:${index * 100}ms`}>
+						<div class="terminal-name"><span>{terminal.brand}</span><strong>{terminal.model}</strong></div>
+						<img src={placeholder.src} alt={terminal.alt} loading="lazy" />
+					</article>
+				))}
+			</div>
+
+			<article class="terminal-card featured-terminal reveal">
+				<img src={placeholder.src} alt="Espacio reservado para el punto de venta Lavu" loading="lazy" />
+				<div class="terminal-name"><span>Lavu</span><strong>Punto de venta</strong></div>
+			</article>
+		</div>
+
+		<a class="terminals-link reveal" href="#contacto">Encuentra tu terminal <span aria-hidden="true">→</span></a>
+	</div>
+</section>
