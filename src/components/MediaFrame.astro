@@ -1,6 +1,6 @@
 ---
-import placeholder from '../assets/image-placeholder.png';
-interface Props { alt: string; tilted?: boolean; }
-const { alt, tilted = false } = Astro.props;
+import type { ImageMetadata } from 'astro';
+interface Props { image: ImageMetadata; alt: string; tilted?: boolean; }
+const { image, alt, tilted = false } = Astro.props;
 ---
-<div class:list={['media-frame', tilted && 'tilted', 'reveal']}><img src={placeholder.src} alt={alt} /></div>
+<div class:list={['media-frame', tilted && 'tilted', 'reveal']}><img src={image.src} alt={alt} loading="lazy" /></div>

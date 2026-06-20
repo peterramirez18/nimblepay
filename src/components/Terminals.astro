@@ -1,9 +1,11 @@
 ---
-import placeholder from '../assets/image-placeholder.png';
+import cloverFlex from '../assets/generated/clover-flex.webp';
+import dejavoP8 from '../assets/generated/dejavoo-p8.webp';
+import lavuPos from '../assets/generated/lavu-pos.webp';
 
 const compactTerminals = [
-	{ brand: 'Clover', model: 'Flex 2026', alt: 'Espacio reservado para la terminal Clover Flex 2026' },
-	{ brand: 'Dejavoo', model: 'P8', alt: 'Espacio reservado para la terminal Dejavoo P8' },
+	{ brand: 'Clover', model: 'Flex 2026', image: cloverFlex, alt: 'Terminal de pago móvil de formato compacto' },
+	{ brand: 'Dejavoo', model: 'P8', image: dejavoP8, alt: 'Terminal de pago vertical y compacta' },
 ];
 ---
 
@@ -23,13 +25,13 @@ const compactTerminals = [
 				{compactTerminals.map((terminal, index) => (
 					<article class="terminal-card compact-terminal reveal" style={`--delay:${index * 100}ms`}>
 						<div class="terminal-name"><span>{terminal.brand}</span><strong>{terminal.model}</strong></div>
-						<img src={placeholder.src} alt={terminal.alt} loading="lazy" />
+						<img src={terminal.image.src} alt={terminal.alt} loading="lazy" />
 					</article>
 				))}
 			</div>
 
 			<article class="terminal-card featured-terminal reveal">
-				<img src={placeholder.src} alt="Espacio reservado para el punto de venta Lavu" loading="lazy" />
+				<img src={lavuPos.src} alt="Sistema de punto de venta para restaurantes" loading="lazy" />
 				<div class="terminal-name"><span>Lavu</span><strong>Punto de venta</strong></div>
 			</article>
 		</div>

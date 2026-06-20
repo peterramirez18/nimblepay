@@ -1,6 +1,7 @@
 ---
 import Button from './Button.astro';
 import MediaFrame from './MediaFrame.astro';
+import heroPos from '../assets/generated/hero-pos.webp';
 ---
 <section class="hero dark-section">
 	<div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
@@ -11,7 +12,7 @@ import MediaFrame from './MediaFrame.astro';
 			<div class="button-row"><Button href="#contacto">Agendar demo gratis <span aria-hidden="true">↗</span></Button><Button href="tel:+12082841772" variant="ghost">Llama o escribe: (208) 284-1772</Button></div>
 		</div>
 		<div class="hero-visual reveal">
-			<MediaFrame alt="Espacio reservado para mostrar el sistema POS de Nimble Pay" />
+			<MediaFrame image={heroPos} alt="Sistema de punto de venta moderno con terminal de pago" />
 			<div class="floating-note"><span>POS listo</span><strong>Conecta y cobra.</strong></div>
 		</div>
 	</div>
