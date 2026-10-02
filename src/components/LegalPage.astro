@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BrandLogo from './BrandLogo.astro';
+import type { Locale } from '../content/site';
+interface Props { locale: Locale; kind: 'privacy' | 'terms' }
+const { locale, kind } = Astro.props;
+const es = locale === 'es';
+const copy = kind === 'privacy' ? {
+  title: es ? 'Política de privacidad' : 'Privacy policy',
+  intro: es ? 'Este documento es un borrador provisional para la etapa de desarrollo del sitio.' : 'This document is a temporary draft for the website development stage.',
+  sections: es ? [['Información que recopilamos', 'Podemos recopilar la información que compartes al solicitar una demo, como nombre, negocio, correo y teléfono.'], ['Cómo la usamos', 'La información se utiliza para responder tu solicitud, coordinar una demostración y brindar información sobre los servicios de Nimble Pay.'], ['Contacto', 'Para preguntas sobre privacidad, escribe a opedraza@nimblepay.com.']] : [['Information we collect', 'We may collect information you provide when requesting a demo, including your name, business, email, and phone number.'], ['How we use it', 'We use this information to respond to your request, coordinate a demo, and provide information about Nimble Pay services.'], ['Contact', 'For privacy questions, email opedraza@nimblepay.com.']],
+} : {
+  title: es ? 'Términos de uso' : 'Terms of use',
+  intro: es ? 'Este documento es un borrador provisional y debe ser revisado antes de publicar el sitio.' : 'This document is a temporary draft and must be reviewed before the website is published.',
+  sections: es ? [['Información general', 'El contenido del sitio es informativo y no constituye una oferta contractual.'], ['Promociones y equipos', 'La disponibilidad de equipos, precios, promociones y servicios está sujeta a aprobación, elegibilidad y términos aplicables.'], ['Marcas', 'Las marcas de terceros pertenecen a sus respectivos propietarios.']] : [['General information', 'Website content is provided for informational purposes and does not constitute a contractual offer.'], ['Promotions and equipment', 'Equipment availability, pricing, promotions, and services are subject to approval, eligibility, and applicable terms.'], ['Trademarks', 'Third-party trademarks belong to their respective owners.']],
+};
+---
+<Layout title={`${copy.title} | Nimble Pay`} description={copy.intro} lang={locale}>
+  <header class="np-header np-header-solid"><div class="np-container np-nav"><a class="np-brand" href={`/${locale}/`}><BrandLogo /></a><a class="np-button np-button-small" href={`/${locale}/`}>{es ? 'Volver' : 'Back'}</a></div></header>
+  <main class="np-legal"><div class="np-container"><span class="np-badge">{es ? 'BORRADOR PROVISIONAL' : 'TEMPORARY DRAFT'}</span><h1>{copy.title}</h1><p class="np-lead">{copy.intro}</p>{copy.sections.map((section) => <section><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</div></main>
+</Layout>

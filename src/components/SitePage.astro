@@ -1,0 +1,65 @@
+---
+import BrandLogo from './BrandLogo.astro';
+import Layout from '../layouts/Layout.astro';
+import heroImage from '../assets/generated/hero.png';
+import cloverFlex from '../assets/generated/clover-flex.png';
+import dejavoP8 from '../assets/generated/dejavoo-p8.png';
+import lavuPos from '../assets/generated/lavu.png';
+import integratedPos from '../assets/generated/integrated-pos.webp';
+import processingSavings from '../assets/generated/processing-savings.webp';
+import cloverLogo from '../assets/partner-logos/clover.svg';
+import dejavoLogo from '../assets/partner-logos/dejavoo.webp';
+import lavuLogo from '../assets/partner-logos/lavu.webp';
+import shift4Logo from '../assets/partner-logos/shift4.svg';
+import { siteCopy, type Locale } from '../content/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const c = siteCopy[locale];
+const products = [cloverFlex, dejavoP8, lavuPos];
+const partners = [{ name: 'Clover', image: cloverLogo }, { name: 'Dejavoo', image: dejavoLogo }, { name: 'Lavu', image: lavuLogo }, { name: 'Shift4', image: shift4Logo }];
+---
+<Layout title={c.title} description={c.description} lang={c.lang}>
+  <header class="np-header"><div class="np-container np-nav"><a class="np-brand" href={c.path} aria-label="Nimble Pay"><BrandLogo /></a><nav aria-label="Main navigation"><a href="#solutions">{c.nav.solutions}</a><a href="#industries">{c.nav.industries}</a><a href="#hardware">{c.nav.hardware}</a><a href="#about">{c.nav.about}</a><a href="#support">{c.nav.support}</a></nav><div class="np-nav-actions"><a class="np-language" href={c.altPath} aria-label="Change language">{c.altLabel}</a><a class="np-button np-button-small" href="#demo">{c.demo}</a></div></div></header>
+
+  <main>
+    <section class="np-hero"><div class="np-hero-glow" aria-hidden="true"></div><div class="np-container np-hero-grid"><div class="np-hero-copy reveal"><p class="np-eyebrow">{c.hero.eyebrow}</p><h1>{c.hero.title}</h1><p class="np-lead">{c.hero.body}</p><div class="np-actions"><a class="np-button" href="#demo">{c.hero.primary}</a><a class="np-button np-button-ghost" href="tel:+12082841772">{c.hero.secondary}</a></div><p class="np-micro">Meridian, Idaho · English & Español</p></div><div class="np-hero-media reveal"><img src={heroImage.src} alt="Clover, Dejavoo and Lavu payment equipment" /><div class="np-float-card"><span>{c.hero.note}</span><strong>{c.hero.noteStrong}</strong></div></div></div></section>
+
+    <section class="np-partners" aria-label={c.trust}><div class="np-container"><p>{c.trust}</p><div class="np-partner-row">{partners.map((partner) => <img src={partner.image.src} alt={partner.name} loading="lazy" />)}</div></div></section>
+
+    <section class="np-section" id="solutions"><div class="np-container"><div class="np-heading reveal"><p class="np-eyebrow">{c.payments.eyebrow}</p><h2>{c.payments.title}</h2><p>{c.payments.body}</p></div><div class="np-card-grid">{c.payments.items.map((item, index) => <article class="np-feature-card reveal"><span>0{index + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
+
+    <section class="np-section np-soft" id="industries"><div class="np-container"><div class="np-heading reveal"><p class="np-eyebrow">{c.industries.eyebrow}</p><h2>{c.industries.title}</h2></div><div class="np-industry-grid">{c.industries.items.map((item, index) => <article class={`np-industry np-industry-${index + 1} reveal`}><div><p>0{index + 1}</p><h3>{item[0]}</h3><span>{item[1]}</span></div></article>)}</div></div></section>
+
+    <section class="np-section np-dark" id="hardware"><div class="np-container"><div class="np-heading np-heading-light reveal"><p class="np-eyebrow">{c.hardware.eyebrow}</p><h2>{c.hardware.title}</h2><p>{c.hardware.body}</p></div><div class="np-product-grid">{c.hardware.products.map((item, index) => <article class="np-product-card reveal"><img src={products[index].src} alt={item[0]} loading="lazy" /><div><span>{item[1]}</span><h3>{item[0]}</h3></div></article>)}</div><a class="np-text-link" href="#demo">{c.hardware.cta} <span>→</span></a></div></section>
+
+    <section class="np-section"><div class="np-container np-split"><div class="reveal"><p class="np-eyebrow">{c.savings.eyebrow}</p><h2>{c.savings.title}</h2><p>{c.savings.body}</p><ul class="np-checks">{c.savings.points.map((point) => <li>{point}</li>)}</ul></div><div class="np-image-panel reveal"><img src={processingSavings.src} alt="Payment processing consultation" loading="lazy" /></div></div></section>
+
+    <section class="np-section np-about" id="about"><div class="np-container np-split"><div class="np-image-panel np-image-pos reveal"><img src={integratedPos.src} alt="Integrated point of sale system" loading="lazy" /></div><div class="reveal"><p class="np-eyebrow">{c.about.eyebrow}</p><h2>{c.about.title}</h2><p>{c.about.body}</p><p>{c.about.body2}</p><div class="np-location"><strong>Meridian, Idaho</strong><span>Local support · Bilingual service</span></div></div></div></section>
+
+    <section class="np-section np-testimonial"><div class="np-container np-story reveal"><div><p class="np-eyebrow">{c.testimonial.eyebrow}</p><span class="np-badge">{c.testimonial.badge}</span></div><div><h2>{c.testimonial.title}</h2><p>{c.testimonial.body}</p></div></div></section>
+
+    <section class="np-section np-dark" id="support"><div class="np-container np-support-grid"><div class="np-heading np-heading-light reveal"><p class="np-eyebrow">{c.support.eyebrow}</p><h2>{c.support.title}</h2><p>{c.support.body}</p></div><div class="np-support-list">{c.support.items.map((item, index) => <article class="reveal"><span>0{index + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div></article>)}</div></div></section>
+
+    <section class="np-section np-faq"><div class="np-container np-faq-grid"><div class="np-heading reveal"><p class="np-eyebrow">{c.faq.eyebrow}</p><h2>{c.faq.title}</h2></div><div>{c.faq.items.map((item, index) => <details class="reveal" open={index === 0}><summary>{item[0]}<span>+</span></summary><p>{item[1]}</p></details>)}</div></div></section>
+
+    <section class="np-demo" id="demo"><div class="np-container np-demo-grid"><div class="reveal"><p class="np-eyebrow">{c.form.eyebrow}</p><h2>{c.form.title}</h2><p>{c.form.body}</p><a href="tel:+12082841772">(208) 284-1772</a><a href="mailto:opedraza@nimblepay.com">opedraza@nimblepay.com</a></div><form class="np-form reveal" data-demo-form data-locale={locale}><label>{c.form.name}<input name="name" required /></label><label>{c.form.business}<input name="business" required /></label><label>{c.form.email}<input name="email" type="email" required /></label><label>{c.form.phone}<input name="phone" type="tel" /></label><label class="np-form-wide">{c.form.type}<select name="type" required><option value="">—</option>{c.form.options.map((option) => <option>{option}</option>)}</select></label><label class="np-form-wide">{c.form.message}<textarea name="message" rows="4"></textarea></label><button class="np-button np-form-wide" type="submit">{c.form.submit}</button><small class="np-form-wide">{c.form.consent}</small></form></div></section>
+  </main>
+
+  <footer class="np-footer"><div class="np-container np-footer-grid"><div><BrandLogo footer /><p>{c.footer.tagline}</p></div><div><strong>{c.footer.explore}</strong><a href="#solutions">{c.nav.solutions}</a><a href="#industries">{c.nav.industries}</a><a href="#hardware">{c.nav.hardware}</a><a href="#about">{c.nav.about}</a></div><div><strong>{c.footer.contact}</strong><a href="tel:+12082841772">(208) 284-1772</a><a href="mailto:opedraza@nimblepay.com">opedraza@nimblepay.com</a><span>Meridian, Idaho</span></div></div><div class="np-container np-footer-bottom"><span>© {new Date().getFullYear()} Nimble Pay</span><div><a href={`/${locale}/privacy/`}>{c.footer.privacy}</a><a href={`/${locale}/terms/`}>{c.footer.terms}</a></div><p>{c.footer.disclaimer}</p></div></footer>
+
+  <script is:inline>
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    document.querySelectorAll('[data-demo-form]').forEach((form) => form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const isEnglish = form.dataset.locale === 'en';
+      const subject = isEnglish ? 'Nimble Pay demo request' : 'Solicitud de demo Nimble Pay';
+      const labels = isEnglish ? ['Name', 'Business', 'Email', 'Phone', 'Business type', 'Message'] : ['Nombre', 'Negocio', 'Correo', 'Teléfono', 'Tipo de negocio', 'Mensaje'];
+      const keys = ['name', 'business', 'email', 'phone', 'type', 'message'];
+      const body = keys.map((key, index) => `${labels[index]}: ${data.get(key) || '-'}`).join('\n');
+      window.location.href = `mailto:opedraza@nimblepay.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }));
+  </script>
+</Layout>
