@@ -4,6 +4,14 @@ import { fileURLToPath } from 'node:url';
 
 // https://astro.build/config
 export default defineConfig({
+    i18n: {
+        defaultLocale: 'es',
+        locales: ['es', 'en'],
+        routing: {
+            prefixDefaultLocale: true,
+            redirectToDefaultLocale: false,
+        },
+    },
     vite: {
         resolve: {
             alias: {

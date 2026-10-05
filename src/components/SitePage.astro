@@ -53,7 +53,10 @@ const instagramPosts = ['DeCrgNqBNK0', 'Dd4W8T_PTSD', 'Ddox0uRhhsZ', 'DdeOV-khRW
 
   <footer class="np-footer"><div class="np-container np-footer-grid"><div><BrandLogo footer /><p>{c.footer.tagline}</p></div><div><strong>{c.footer.explore}</strong><a href="#solutions">{c.nav.solutions}</a><a href="#industries">{c.nav.industries}</a><a href="#hardware">{c.nav.hardware}</a><a href="#about">{c.nav.about}</a></div><div><strong>{c.footer.contact}</strong><a href="tel:+12082841772">(208) 284-1772</a><a href="mailto:opedraza@nimblepay.com">opedraza@nimblepay.com</a><span>Meridian, Idaho</span></div></div><div class="np-container np-footer-bottom"><span>© {new Date().getFullYear()} Nimble Pay</span><div><a href={`/${locale}/privacy/`}>{c.footer.privacy}</a><a href={`/${locale}/terms/`}>{c.footer.terms}</a></div><p>{c.footer.disclaimer}</p></div></footer>
 
-  <script define:vars={{ calculator: c.savings.calculator, locale }}>
+  <script is:inline data-astro-rerun define:vars={{ calculator: c.savings.calculator, locale }}>
+    (() => {
+    if (window.__nimblePayCleanup) window.__nimblePayCleanup();
+    const cleanupTasks = [];
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .08 });
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     document.querySelectorAll('[data-demo-form]').forEach((form) => form.addEventListener('submit', (event) => {
@@ -143,8 +146,19 @@ const instagramPosts = ['DeCrgNqBNK0', 'Dd4W8T_PTSD', 'Ddox0uRhhsZ', 'DdeOV-khRW
       });
       slider.addEventListener('scroll', updateControls, { passive: true });
       window.addEventListener('resize', updateControls);
+      cleanupTasks.push(() => {
+        stopAutoplay();
+        window.removeEventListener('resize', updateControls);
+      });
       updateControls();
       startAutoplay();
     });
+    window.__nimblePayCleanup = () => {
+      observer.disconnect();
+      cleanupTasks.forEach((cleanup) => cleanup());
+      window.__nimblePayCleanup = null;
+    };
+    document.addEventListener('astro:before-swap', () => window.__nimblePayCleanup?.(), { once: true });
+    })();
   </script>
 </Layout>
