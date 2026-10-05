@@ -7,7 +7,8 @@ import cloverSystem from '../assets/equipment/clover-system.png';
 import sumupSystem from '../assets/equipment/sumup-system.png';
 import lavuMobile from '../assets/equipment/lavu-mobile.png';
 import lavuCounter from '../assets/equipment/lavu-counter.png';
-import heroEquipmentComposition from '../assets/equipment/hero-equipment-composition-transparent.png';
+import heroVideo from '../assets/hero-concepts/hero-video-loop-v1.mp4?url';
+import heroPoster from '../assets/hero-concepts/hero-video-frame-v1.png';
 import cloverLogo from '../assets/partner-logos/clover.svg';
 import lavuLogo from '../assets/partner-logos/lavu.webp';
 import sumupLogo from '../assets/partner-logos/sumup.svg';
@@ -26,7 +27,7 @@ const instagramPosts = ['DeCrgNqBNK0', 'Dd4W8T_PTSD', 'Ddox0uRhhsZ', 'DdeOV-khRW
   <header class="np-header"><div class="np-container np-nav"><a class="np-brand" href={c.path} aria-label="Nimble Pay"><BrandLogo /></a><nav aria-label="Main navigation"><a href="#solutions">{c.nav.solutions}</a><a href="#industries">{c.nav.industries}</a><a href="#hardware">{c.nav.hardware}</a><a href="#about">{c.nav.about}</a><a href="#support">{c.nav.support}</a></nav><div class="np-nav-actions"><a class="np-language" href={c.altPath} aria-label="Change language">{c.altLabel}</a><a class="np-button np-button-small" href="#demo">{c.demo}</a></div></div></header>
 
   <main>
-    <section class="np-hero"><div class="np-hero-glow" aria-hidden="true"></div><div class="np-container np-hero-grid"><div class="np-hero-copy reveal"><p class="np-eyebrow">{c.hero.eyebrow}</p><h1>{c.hero.title}</h1><p class="np-lead">{c.hero.body}</p><div class="np-actions"><a class="np-button" href="#demo">{c.hero.primary}</a><a class="np-button np-button-ghost" href="tel:+12082841772">{c.hero.secondary} <span>→</span></a></div><div class="np-hero-proof"><span></span><p><strong>Meridian, Idaho</strong> · English & Español</p></div></div><div class="np-hero-media np-composite-hero reveal"><Image src={heroEquipmentComposition} format="webp" alt="Clover, SumUp and Lavu point of sale systems" /><div class="np-composite-caption"><span>{c.hero.note}</span><strong>{c.hero.noteStrong}</strong></div></div></div></section>
+    <section class="np-hero np-hero-video"><video class="np-hero-video-bg" autoplay muted loop playsinline preload="auto" poster={heroPoster.src} aria-hidden="true" data-hero-video><source src={heroVideo} type="video/mp4" /></video><div class="np-hero-video-shade" aria-hidden="true"></div><div class="np-container np-hero-video-content"><div class="np-hero-copy reveal"><p class="np-eyebrow">{c.hero.eyebrow}</p><h1>{c.hero.title}</h1><p class="np-lead">{c.hero.body}</p><div class="np-actions"><a class="np-button" href="#demo">{c.hero.primary}</a><a class="np-button np-button-ghost" href="tel:+12082841772">{c.hero.secondary} <span>→</span></a></div><div class="np-hero-proof"><span></span><p><strong>Meridian, Idaho</strong> · English & Español</p></div></div></div></section>
 
     <section class="np-partners" aria-label={c.trust}><div class="np-container"><p>{c.trust}</p><div class="np-partner-row">{partners.map((partner) => <img src={partner.image.src} alt={partner.name} loading="lazy" />)}</div></div></section>
 
@@ -57,6 +58,15 @@ const instagramPosts = ['DeCrgNqBNK0', 'Dd4W8T_PTSD', 'Ddox0uRhhsZ', 'DdeOV-khRW
     (() => {
     if (window.__nimblePayCleanup) window.__nimblePayCleanup();
     const cleanupTasks = [];
+    const heroVideoElement = document.querySelector('[data-hero-video]');
+    if (heroVideoElement) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroVideoElement.pause();
+        heroVideoElement.currentTime = 0;
+      } else {
+        heroVideoElement.play().catch(() => {});
+      }
+    }
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .08 });
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     document.querySelectorAll('[data-demo-form]').forEach((form) => form.addEventListener('submit', (event) => {
