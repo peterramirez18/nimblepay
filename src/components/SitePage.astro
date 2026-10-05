@@ -2,7 +2,7 @@
 import BrandLogo from './BrandLogo.astro';
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import integratedPos from '../assets/generated/integrated-pos.webp';
+import aboutLocalSupport from '../assets/about/nimble-pay-local-support.png';
 import cloverSystem from '../assets/equipment/clover-system.png';
 import sumupSystem from '../assets/equipment/sumup-system.png';
 import lavuMobile from '../assets/equipment/lavu-mobile.png';
@@ -20,6 +20,7 @@ const { locale } = Astro.props;
 const c = siteCopy[locale];
 const products = [cloverSystem, sumupSystem, lavuCounter, lavuMobile];
 const partners = [{ name: 'Clover', image: cloverLogo }, { name: 'Lavu', image: lavuLogo }, { name: 'SumUp', image: sumupLogo }, { name: 'Dejavoo', image: dejavoLogo }, { name: 'Shift4', image: shift4Logo }];
+const instagramPosts = ['DeCrgNqBNK0', 'Dd4W8T_PTSD', 'Ddox0uRhhsZ', 'DdeOV-khRWe', 'DdU8nh6zQ0K'];
 ---
 <Layout title={c.title} description={c.description} lang={c.lang}>
   <header class="np-header"><div class="np-container np-nav"><a class="np-brand" href={c.path} aria-label="Nimble Pay"><BrandLogo /></a><nav aria-label="Main navigation"><a href="#solutions">{c.nav.solutions}</a><a href="#industries">{c.nav.industries}</a><a href="#hardware">{c.nav.hardware}</a><a href="#about">{c.nav.about}</a><a href="#support">{c.nav.support}</a></nav><div class="np-nav-actions"><a class="np-language" href={c.altPath} aria-label="Change language">{c.altLabel}</a><a class="np-button np-button-small" href="#demo">{c.demo}</a></div></div></header>
@@ -29,6 +30,8 @@ const partners = [{ name: 'Clover', image: cloverLogo }, { name: 'Lavu', image: 
 
     <section class="np-partners" aria-label={c.trust}><div class="np-container"><p>{c.trust}</p><div class="np-partner-row">{partners.map((partner) => <img src={partner.image.src} alt={partner.name} loading="lazy" />)}</div></div></section>
 
+    <section class="np-section np-reels" id="reels"><div class="np-container"><div class="np-reels-heading reveal"><div class="np-heading"><p class="np-eyebrow">{c.reels.eyebrow}</p><h2>{c.reels.title}</h2><p>{c.reels.body}</p></div><div class="np-reel-controls"><button type="button" aria-label={locale === 'es' ? 'Videos anteriores' : 'Previous videos'} data-reel-prev><span>←</span></button><button type="button" aria-label={locale === 'es' ? 'Videos siguientes' : 'Next videos'} data-reel-next><span>→</span></button></div></div><div class="np-reel-grid" data-reel-slider>{instagramPosts.map((post, index) => <article class="np-reel-card reveal" data-reel-card><div class="np-reel-media"><video src={`/media/reels/${post}-final.mp4`} poster={`/media/reels/${post}.jpg`} preload="metadata" playsinline aria-label={`${c.reels.item} ${index + 1}`} data-reel-video></video><button type="button" class="np-reel-play" aria-label={`${c.reels.play} ${index + 1}`} data-reel-play><span></span></button><div class="np-reel-mark"><b>NP</b><span>0{index + 1}</span></div></div><a href={`https://www.instagram.com/p/${post}/`} target="_blank" rel="noreferrer">{c.reels.open} <span>↗</span></a></article>)}</div></div></section>
+
     <section class="np-section" id="solutions"><div class="np-container"><div class="np-heading reveal"><p class="np-eyebrow">{c.payments.eyebrow}</p><h2>{c.payments.title}</h2><p>{c.payments.body}</p></div><div class="np-card-grid">{c.payments.items.map((item, index) => <article class="np-feature-card reveal"><span>0{index + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
 
     <section class="np-section np-soft" id="industries"><div class="np-container"><div class="np-heading reveal"><p class="np-eyebrow">{c.industries.eyebrow}</p><h2>{c.industries.title}</h2></div><div class="np-industry-grid">{c.industries.items.map((item, index) => <article class={`np-industry np-industry-${index + 1} reveal`}><div><p>0{index + 1}</p><h3>{item[0]}</h3><span>{item[1]}</span></div></article>)}</div></div></section>
@@ -37,9 +40,9 @@ const partners = [{ name: 'Clover', image: cloverLogo }, { name: 'Lavu', image: 
 
     <section class="np-section"><div class="np-container np-split np-dual-pricing"><div class="reveal"><p class="np-eyebrow">{c.savings.eyebrow}</p><h2>{c.savings.title}</h2><p>{c.savings.body}</p><ol class="np-steps">{c.savings.points.map((point, index) => <li><span>0{index + 1}</span>{point}</li>)}</ol></div><div class="np-pricing-demo reveal" data-pricing-demo><div class="np-demo-screen"><div class="np-demo-top"><span>{c.savings.calculator.example}</span><strong>{c.savings.calculator.live}</strong></div><label>{c.savings.calculator.amount}<span><b>$</b><input data-price-input type="number" min="1" max="9999" step="0.01" value="20.00" inputmode="decimal" /></span></label><div class="np-method-toggle" role="group" aria-label={c.savings.calculator.method}><button type="button" data-method="card" class="active">{c.savings.calculator.card}</button><button type="button" data-method="cash">{c.savings.calculator.cash}</button></div><div class="np-receipt"><div><span>{c.savings.calculator.cardPrice}</span><strong data-card-price>$20.00</strong></div><div data-discount-row hidden><span>{c.savings.calculator.discount} <small>(4%)</small></span><strong data-discount>−$0.80</strong></div><div class="np-total"><span>{c.savings.calculator.total}</span><strong data-total>$20.00</strong></div></div><p data-demo-message>{c.savings.calculator.cardMessage}</p></div><div class="np-demo-hint">{c.savings.calculator.hint}</div></div></div></section>
 
-    <section class="np-section np-about" id="about"><div class="np-container np-split"><div class="np-image-panel np-image-pos reveal"><img src={integratedPos.src} alt="Integrated point of sale system" loading="lazy" /></div><div class="reveal"><p class="np-eyebrow">{c.about.eyebrow}</p><h2>{c.about.title}</h2><p>{c.about.body}</p><p>{c.about.body2}</p><div class="np-location"><strong>Meridian, Idaho</strong><span>Local support · Bilingual service</span></div></div></div></section>
+    <section class="np-section np-about" id="about"><div class="np-container np-split"><div class="np-image-panel np-about-image reveal"><Image src={aboutLocalSupport} format="webp" alt={locale === 'es' ? 'Asesora de Nimble Pay ayudando al propietario de un restaurante con su sistema POS' : 'Nimble Pay advisor helping a restaurant owner with a POS system'} loading="lazy" /></div><div class="reveal"><p class="np-eyebrow">{c.about.eyebrow}</p><h2>{c.about.title}</h2><p>{c.about.body}</p><p>{c.about.body2}</p><div class="np-location"><strong>Meridian, Idaho</strong><span>Local support · Bilingual service</span></div></div></div></section>
 
-    <section class="np-section np-testimonial"><div class="np-container np-story reveal"><div><p class="np-eyebrow">{c.testimonial.eyebrow}</p><span class="np-badge">{c.testimonial.badge}</span></div><div><h2>{c.testimonial.title}</h2><p>{c.testimonial.body}</p></div></div></section>
+    <section class="np-section np-testimonial"><div class="np-container"><div class="np-story-heading reveal"><div><p class="np-eyebrow">{c.testimonial.eyebrow}</p><span class="np-badge">{c.testimonial.badge}</span></div><div><h2>{c.testimonial.title}</h2><p>{c.testimonial.body}</p></div></div><div class="np-testimonial-grid">{c.testimonial.items.map((item, index) => <article class="np-testimonial-card reveal"><div class="np-story-number">0{index + 1}</div><div><span>{c.testimonial.pending}</span><h3>{item[0]}</h3><p>{item[1]}</p></div></article>)}</div></div></section>
 
     <section class="np-section np-dark" id="support"><div class="np-container np-support-grid"><div class="np-heading np-heading-light reveal"><p class="np-eyebrow">{c.support.eyebrow}</p><h2>{c.support.title}</h2><p>{c.support.body}</p></div><div class="np-support-list">{c.support.items.map((item, index) => <article class="reveal"><span>0{index + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div></article>)}</div></div></section>
 
@@ -87,6 +90,61 @@ const partners = [{ name: 'Clover', image: cloverLogo }, { name: 'Lavu', image: 
       input.addEventListener('input', update);
       buttons.forEach((button) => button.addEventListener('click', () => { method = button.dataset.method; update(); }));
       update();
+    });
+    document.querySelectorAll('[data-reel-card]').forEach((card) => {
+      const video = card.querySelector('[data-reel-video]');
+      const play = card.querySelector('[data-reel-play]');
+      const pauseOtherVideos = () => document.querySelectorAll('[data-reel-video]').forEach((other) => { if (other !== video) other.pause(); });
+      const toggle = () => {
+        if (video.paused) { pauseOtherVideos(); video.play(); }
+        else video.pause();
+      };
+      play.addEventListener('click', toggle);
+      video.addEventListener('click', toggle);
+      video.addEventListener('play', () => card.classList.add('is-playing'));
+      video.addEventListener('pause', () => card.classList.remove('is-playing'));
+      video.addEventListener('ended', () => card.classList.remove('is-playing'));
+    });
+    document.querySelectorAll('[data-reel-slider]').forEach((slider) => {
+      const section = slider.closest('.np-reels');
+      const previous = section.querySelector('[data-reel-prev]');
+      const next = section.querySelector('[data-reel-next]');
+      const videos = [...slider.querySelectorAll('[data-reel-video]')];
+      let autoplay;
+      const step = () => {
+        const card = slider.querySelector('[data-reel-card]');
+        const gap = Number.parseFloat(getComputedStyle(slider).gap) || 0;
+        return card.getBoundingClientRect().width + gap;
+      };
+      const updateControls = () => {
+        const max = slider.scrollWidth - slider.clientWidth;
+        previous.disabled = slider.scrollLeft <= 2;
+        next.disabled = slider.scrollLeft >= max - 2;
+      };
+      const stopAutoplay = () => window.clearInterval(autoplay);
+      const startAutoplay = () => {
+        stopAutoplay();
+        autoplay = window.setInterval(() => {
+          if (document.hidden || videos.some((video) => !video.paused)) return;
+          const max = slider.scrollWidth - slider.clientWidth;
+          slider.scrollTo({ left: slider.scrollLeft >= max - 2 ? 0 : slider.scrollLeft + step(), behavior: 'smooth' });
+        }, 5000);
+      };
+      const move = (direction) => {
+        slider.scrollBy({ left: direction * step(), behavior: 'smooth' });
+        startAutoplay();
+      };
+      previous.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+      videos.forEach((video) => {
+        video.addEventListener('play', stopAutoplay);
+        video.addEventListener('pause', () => { if (!videos.some((item) => !item.paused)) startAutoplay(); });
+        video.addEventListener('ended', () => { if (!videos.some((item) => !item.paused)) startAutoplay(); });
+      });
+      slider.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls);
+      updateControls();
+      startAutoplay();
     });
   </script>
 </Layout>
